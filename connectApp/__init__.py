@@ -13,8 +13,8 @@ ALLOWED_EXTENSIONS = {'png', 'jpeg', 'jpg'}
 
 def create_app():
     app = Flask(__name__)
-    # app.config['SECRET_KEY'] = "os.environ['SECRET_KEY']"
-    # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+    app.config['SECRET_KEY'] = "os.environ['SECRET_KEY']"
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     db.init_app(app)
