@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MyLinks</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ url_for('static', filename='styles/styles.css') }}" rel="stylesheet">
+        <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+        <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+        {% block link %} {% endblock %}
+    </head>
+
+    <body>
+    
+        <nav class="navbar">
+
+            <div class="links">
+                <div class="border">
+                    <a href="{{ url_for('main.index') }}">Home</a>
+                </div>
+
+                {% if not current_user.is_authenticated %}
+                <div class="border">
+                    <a href="{{ url_for('auth.signup') }}">Sign Up</a>
+                </div>
+                <div class="border">
+                    <a href="{{ url_for('auth.login') }}">Login</a>
+                </div>
+                {% endif %}
+
+                {% if current_user.is_authenticated %}
+                <div class="border">
+                    <a href="{{ url_for('main.profile') }}">Profile</a>
+                </div>
+                <div class="border">
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="brand">
+                <a id="brand" href="{{ url_for('main.index') }}"><h2>B E N J I</h2></a>
+            </div>
+
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+
+    <!-- <footer>
+        <div class="foot-cont">
+            <h2>Hello world</h2>
+        </div>
+    </footer> -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</html>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %} 
+
+{% block link %} 
+<link href="{{ url_for('static', filename='styles/profile.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block content %} 
+
+        <div class="container">
+
+            <header>
+                <div class="profile">
+                    <a href="{{ url_for('edit.profile_config') }}"><img id="pfp" src="{{ pfp }}" alt="Profile Picture"></a>
+                    <h3 id="username">{{ name }}</h3>
+                    <!-- <input type="text" name="description" value="{{ name }}"> -->
+                    <p>{{ description }}</p>
+                </div>
+            </header>
+
+            <div class="boxes">
+                {% for link in lnks %}
+                <div class="box">
+                    <a href="/edit-lnk/{{link.id}}"><h5>{{ link.title }}</h5></a>
+                    
+                </div>
+
+                {% endfor %}
+                
+            </div>
+            
+            <div class="white-circle">
+                <a id="plus" href="{{ url_for('edit.add') }}">
+                    <i style="font-size:24px;" class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="white-circle">
+                <a id="edit" href="{{ url_for('main.profile') }}">
+                    <i style="font-size:24px;" class="fa fa-floppy-o"></i>
+                </a>
+            </div>
+            <div class="edit_bar">
+                <h5>You're on editing mode. Click on anywhere you want to change.</h5>
+            </div>
+
+        </div>
+
+
+ {% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block link %} 
+<link href="{{ url_for('static', filename='styles/styles.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %} 
+
+<div class="content2">
+    {% if current_user.is_authenticated %}
+    <div class="left-col">
+        <h1>Welcome back {{ current_user.username }}</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, impedit. Delectus, suscipit qui! Dolorum nulla repellendus veniam deleniti laborum ea repudiandae inventore, necessitatibus laudantium commodi maiores, voluptates, quae exercitationem optio.</p>
+        <!-- <a href="{{ url_for('edit.add') }}"><button>Add new lnk</button></a> -->
+
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

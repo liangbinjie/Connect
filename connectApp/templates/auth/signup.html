@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+
+<div class="form-group">
+
+  <form action="/signup"  method="POST" class="form">
+      <div class="title">
+          <h2>Create Account</h2>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %} 
+        <div class="flashmsg">
+            {% for message in messages %} 
+            <h3>{{ message }}</h3>
+            {% endfor %}
+        </div>
+        {% endif %} 
+       {% endwith %}
+
+      <div class="form-label">
+          <label for="username">Username</label>
+          <br>
+          <input type="text" placeholder="username" name="username">
+      </div>
+
+      <div class="form-label">
+          <label for="email">Email</label>
+          <br>
+          <input type="email" placeholder="youremail@email.com" name="email">
+      </div>
+
+      <div class="form-label">
+          <label for="password">Password</label>
+          <br>
+          <input type="password" placeholder="Password" name="password">
+      </div>
+
+      <!-- <div class="form-label">
+          <label for="password-check">Confirm password</label>
+          <br>
+          <input type="password" placeholder="Confirm password" id="password">
+      </div> -->
+<hr>
+      <div class="buttons">
+          <!-- <button>Sign In with Google</button> -->
+          <button>Sign Up</button>   
+
+      </div>
+
+      <div class="description">
+          <p>Already have an account?<a id="loglink" href="{{ url_for('auth.login') }}">Click here</a></p>
+      </div>
+  </form>
+</div>
+
+{% endblock %}  
