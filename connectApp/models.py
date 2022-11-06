@@ -10,6 +10,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     username = db.Column(db.String(100), unique=True)
     description = db.Column(db.String(40))
+    pfp = db.Column(db.LargeBinary())
 
     links = db.relationship('Links', backref="owner")
 
