@@ -1,8 +1,5 @@
-from typing import NamedTuple
 from flask_login import UserMixin
-from sqlalchemy.orm import backref
 from . import db
-from datetime import datetime
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,7 +18,3 @@ class Links(db.Model):
     url = db.Column(db.String(1000))
     title = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-
-    
-    
