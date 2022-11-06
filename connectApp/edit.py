@@ -1,10 +1,9 @@
 from flask import Blueprint, render_template, request, url_for, flash
 from flask_login import login_required, current_user
-from werkzeug.utils import redirect, secure_filename
+from werkzeug.utils import redirect
 from .models import Links, User
 from . import UPLOAD_FOLDER, db
 from .functions import check_url
-import os
 
 
 edit = Blueprint('edit', __name__)
@@ -50,8 +49,6 @@ def delete_lnk(id):
 
 
 
-
-
 @edit.route('/add')
 @login_required
 def add():
@@ -78,15 +75,12 @@ def add_link():
     return redirect(url_for('edit.edit_profile'))
 
 
-
-
-
 @edit.route('/profile-config')
 @login_required
 def profile_config():
     return render_template('/edit/profile_config.html', description=current_user.description)
 
-
+import base64
 @edit.route('/profile-config', methods=['GET', 'POST'])
 @login_required
 def profile_config_post():
@@ -94,16 +88,18 @@ def profile_config_post():
     if current_user.id == user.id:
         if request.method == 'POST':
             
+            if 'pfp' not in request.files:
+                pass
             pfp = request.files['pfp']
             if pfp.filename == '':
                 pass
             
-            else:
-                idfile = str(current_user.id)+'.jpg'
-                pfp.save(os.path.join(UPLOAD_FOLDER, idfile))
-
+            if pfp:
+                upFile = request.files['pfp'].read()
+                user.pfp = base64.b64encode(upFile)
 
             user.description = request.form['description']
+            
 
             db.session.commit()
 
@@ -113,5 +109,3 @@ def profile_config_post():
 
     else: 
         return render_template('404.html')
-    
-
